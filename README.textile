@@ -1,0 +1,19 @@
+h1. UaLove
+
+UaLove is a library that changes the way LÖVE works to use hooks rather
+than callback functions.
+
+It is freely available and can be used by anyone without any royalty fees.
+
+h2. License
+
+Public Domain, do as you please without any crazy royalty fees!
+Note that backports of any modifications are appreciated!
+
+h3. UaLove Example
+
+bq. --This is the LÖVE Hello World example updated to use UaLove.
+require("ualove")
+hook.add("draw", function()
+	love.graphics.print("Hello World!", 400, 300)
+end, "hello-draw")
