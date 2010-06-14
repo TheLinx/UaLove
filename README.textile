@@ -12,8 +12,8 @@ Note that backports of any modifications are appreciated!
 
 h3. UaLove Example
 
-bq. --This is the LÖVE Hello World example updated to use UaLove.
+@--This is the LÖVE Hello World example updated to use UaLove.
 require("ualove")
 hook.add("draw", function()
 	love.graphics.print("Hello World!", 400, 300)
-end, "hello-draw")
+end, "hello-draw")@
