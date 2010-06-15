@@ -10,7 +10,7 @@ h2. License
 Public Domain, do as you please without any crazy royalty fees!
 Note that backports of any modifications are appreciated!
 
-h3. UaLove Example
+h2. UaLove Example
 
 <pre>
 --This is the LÖVE Hello World example updated to use UaLove.
