@@ -7,7 +7,7 @@ local pixmap_mt = {
 function pixelmap.open(fname)
 	local func,err = love.filesystem.load(fname)
 	if not func then return nil,err end
-	return pixelmap.new(unpack(func()))
+	return pixelmap.new(func())
 end
 
 function pixelmap.new(width, height, colours, data)
@@ -49,9 +49,19 @@ function pixelmap:changeFrame(id)
 end
 
 function pixelmap:updateData()
-	self._imageData:mapPixel(function(x,y)
-		return unpack(self._palette[self._data[self._frame][y+1][x+1]])
-	end)
+	for frame=1,#self._data do
+		local v = self._data[frame]
+		for y=1,#v do
+			local w = v[y]
+			for x=1,#w do
+				if not self._oldData or w[x] ~= self._oldData[frame][y][x] then
+					local c = self._palette[w[x]]
+					self._imageData:setPixel(x, y, c[1], c[2], c[3], c[4])
+				end
+			end
+		end
+	end
+	self._oldData = self._data
 	self._image = love.graphics.newImage(self._imageData)
 end
 
