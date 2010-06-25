@@ -12,6 +12,7 @@ function pixelmap.new(width, height, colours, data)
 	self._palette = colours
 	self._palette[0] = {0,0,0,0}
 	self._data = data
+	self._frame = 1
 	self:updateData()
 	return self
 end
@@ -22,17 +23,24 @@ function pixelmap:changeColour(id, r, g, b, a)
 end
 
 function pixelmap:changeData(newData)
-	for y,v in pairs(newData) do
-		for x,id in pairs(v) do
-			self._data[y][x] = id
+	for frame,v in pairs(newData) do
+		for y,w in pairs(v) do
+			for x,id in pairs(w) do
+				self._data[frame][y][x] = id
+			end
 		end
 	end
 	self:updateData()
 end
 
+function pixelmap:changeFrame(id)
+	self._frame = id
+	self:updateData()
+end
+
 function pixelmap:updateData()
 	self._imageData:mapPixel(function(x,y)
-		return unpack(self._palette[self._data[y+1][x+1]])
+		return unpack(self._palette[self._data[self._frame][y+1][x+1]])
 	end)
 	self._image = love.graphics.newImage(self._imageData)
 end
