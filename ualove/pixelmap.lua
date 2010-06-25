@@ -4,6 +4,12 @@ local pixmap_mt = {
 	__index = pixelmap
 }
 
+function pixelmap.open(fname)
+	local func,err = love.filesystem.load(fname)
+	if not func then return nil,err end
+	return pixelmap.new(unpack(func()))
+end
+
 function pixelmap.new(width, height, colours, data)
 	local self = setmetatable({}, pixmap_mt)
 	self._width,self._height = width,height
@@ -31,6 +37,10 @@ function pixelmap:changeData(newData)
 		end
 	end
 	self:updateData()
+end
+
+function pixelmap:getFrame()
+	return self._frame
 end
 
 function pixelmap:changeFrame(id)

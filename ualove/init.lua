@@ -1,8 +1,5 @@
 game,hook = {state="",hooks={},debug=false,quit=false},{}
 
-t = {...}
-print(t[1])
-
 function hook.add(event, func, id, state, debugonly)
 	assert(type(event) == "string", "bad argument #1 to hook.add (string expected, got "..type(event)..")")
 	assert(type(func) == "function", "bad argument #2 to hook.add (function expected, got "..type(func)..")")
